@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
+    useLibrary 'org.apache.http.legacy'
+    defaultConfig {
+        applicationId "com.example.cniaotuan"
+        minSdkVersion 21
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        //参数说明
+        manifestPlaceholders = [
+                GETUI_APP_ID    : "mIRc6MOwSK9eNKhQBl74l",
+                GETUI_APP_KEY   : "epwbN5wJvf9FA0zWm9Fgo1",
+                GETUI_APP_SECRET: "1zkQu8GkoZAerPbhqKHbP8",
+                PACKAGE_NAME    : applicationId
+        ]
+
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "mips", "mips64", "x86", "x86_64"
+        }
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:24.0.0'
+//    compile 'com.jakewharton:butterknife:5.1.1'
+    implementation 'com.yolanda.nohttp:nohttp:1.0.4'
+    implementation 'com.google.code.gson:gson:2.2.4'
+    compile files('libs/baidumapapi_base_v4_0_0.jar')
+    // 其他依赖
+    implementation 'com.facebook.fresco:fresco:0.12.0'
+    //个推的依赖包
+    implementation 'com.getui:sdk:2.9.0.0'
+    compile project(':libs_PullToRefresh')
+
+    implementation 'com.blankj:utilcode:1.26.0'
+}
